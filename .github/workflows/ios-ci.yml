@@ -18,13 +18,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # Set up Xcode (Обновленный шаг)
+    # Set up Xcode
     - name: Set up Xcode
-      uses: apple-actions/setup-xcode@v2
-      with:
-        xcode-version: '14.0'  # Укажите нужную версию Xcode
+      run: |
+        sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+        sudo xcodebuild -license accept
 
-    # Cache CocoaPods dependencies
+    # Cache CocoaPods dependencies (если проект использует CocoaPods)
     - name: Cache CocoaPods
       uses: actions/cache@v2
       with:
@@ -33,7 +33,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pods-
 
-    # Install dependencies with CocoaPods (если проект использует CocoaPods)
+    # Install dependencies with CocoaPods
     - name: Install CocoaPods dependencies
       run: |
         pod install
