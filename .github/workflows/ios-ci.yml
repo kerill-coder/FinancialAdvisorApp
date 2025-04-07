@@ -24,16 +24,16 @@ jobs:
         sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
         sudo xcodebuild -license accept
 
-    # Cache CocoaPods dependencies (если проект использует CocoaPods)
+    # Cache CocoaPods dependencies
     - name: Cache CocoaPods
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: Pods
         key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-pods-
 
-    # Install dependencies with CocoaPods
+    # Install CocoaPods dependencies
     - name: Install CocoaPods dependencies
       run: |
         pod install
