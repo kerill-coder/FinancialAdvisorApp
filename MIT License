@@ -1,0 +1,26 @@
+### 5. **Тестирование:**
+
+Добавим простые тесты для проверки функциональности модуля **Core** и интерфейса **UI**.
+
+#### Файл `Tests/CoreTests.swift`:
+
+```swift
+import XCTest
+@testable import Core
+
+class CoreTests: XCTestCase {
+
+    func testMarketAnalyzer() {
+        let marketData: [String: Double] = ["AAPL": 150.0, "TSLA": 700.0]
+        let analyzer = MarketAnalyzer()
+        let opportunities = analyzer.analyzeMarket(data: marketData)
+        XCTAssertGreaterThan(opportunities.count, 0, "Анализ рынка не дал результатов")
+    }
+
+    func testTradeExecution() {
+        let executor = TradeExecutor()
+        let order = TradeOrder(symbol: "AAPL", type: .buy, quantity: 10, entryPrice: 150.0)
+        let result = executor.execute(order)
+        XCTAssertTrue(result, "Ошибка при выполнении сделки")
+    }
+}
