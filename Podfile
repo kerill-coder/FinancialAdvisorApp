@@ -1,6 +1,6 @@
 platform :ios, '12.0'
 
-target 'FinancialAdvisorApp' do
+target 'path/to/Project.xcodeproj' do
   use_frameworks!
 
   pod 'Alamofire', '~> 5.4'
