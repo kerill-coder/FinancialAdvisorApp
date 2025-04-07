@@ -5,5 +5,7 @@ target 'FinancialAdvisorApp' do
   
   # Добавьте зависимости сюда, например:
   pod 'Alamofire', '~> 5.4'
-  
+  project 'path/to/Project.xcodeproj'
 end
+
+    
