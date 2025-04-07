@@ -1,7 +1,8 @@
 platform :ios, '12.0'
 
-target 'YourApp' do
+target 'FinancialAdvisorApp' do
   use_frameworks!
-  # Здесь можно добавить зависимости, например:
-  # pod 'Alamofire'
+
+  # Пример зависимости, например Alamofire:
+  pod 'Alamofire', '~> 5.4'
 end
