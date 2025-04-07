@@ -1,8 +1,10 @@
-platform :ios, '14.0'
+platform :ios, '12.0'
 
-target 'FinancialAdvisorApp' do
+# Укажите путь к вашему проекту .xcodeproj
+project 'YourProject.xcodeproj'
+
+# Здесь можно добавить ваши зависимости
+target 'YourApp' do
   use_frameworks!
-
-  # Добавьте сюда библиотеки, например:
-  # pod 'Alamofire'
+  pod 'Alamofire', '~> 5.4'
 end
