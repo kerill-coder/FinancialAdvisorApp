@@ -1,1 +1,49 @@
-# Этот файл
+name: iOS CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and Test iOS App
+    runs-on: macos-latest
+
+    steps:
+    # Checkout repository
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Set up Xcode
+    - name: Set up Xcode
+      uses: macos-actions/setup-xcode@v1
+      with:
+        xcode-version: '13.0' # Укажите версию Xcode, которая используется для сборки
+
+    # Cache CocoaPods dependencies
+    - name: Cache CocoaPods
+      uses: actions/cache@v2
+      with:
+        path: Pods
+        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-pods-
+
+    # Install dependencies with CocoaPods (если проект использует CocoaPods)
+    - name: Install CocoaPods dependencies
+      run: |
+        pod install
+
+    # Build the project
+    - name: Build the app
+      run: |
+        xcodebuild -workspace YourProject.xcworkspace -scheme YourScheme -sdk iphonesimulator -configuration Debug clean build
+
+    # Run Unit tests
+    - name: Run tests
+      run: |
+        xcodebuild -workspace YourProject.xcworkspace -scheme YourScheme -sdk iphonesimulator -configuration Debug test | xcpretty
