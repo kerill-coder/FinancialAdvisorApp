@@ -18,11 +18,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # Set up Xcode
+    # Set up Xcode (Обновленный шаг)
     - name: Set up Xcode
-      uses: macos-actions/setup-xcode@v1
+      uses: apple-actions/setup-xcode@v2
       with:
-        xcode-version: '13.0' # Укажите версию Xcode, которая используется для сборки
+        xcode-version: '14.0'  # Укажите нужную версию Xcode
 
     # Cache CocoaPods dependencies
     - name: Cache CocoaPods
