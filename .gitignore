@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+
+# Xcode
+*.xcworkspace
+*.xcuserstate
+*.xcuserdata
+build/
+
+# Swift Package Manager
+/.build/
+/Package.resolved
+
+# Xcode generated files
+*.hmap
+*.ipa
+*.dSYM
+
+# Log files
+*.log
