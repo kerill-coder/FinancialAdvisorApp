@@ -1,5 +1,7 @@
 platform :ios, '12.0'
 
+project 'YourApp.xcodeproj'
+
 target 'FinancialAdvisorApp' do
   use_frameworks!
 
