@@ -1,25 +1,15 @@
 workflows:
-  my-workflow:
-    name: My workflow name
+  ios-build:
+    name: iOS Native Build
     labels:
       - ios
-      - production
     instance_type: mac_mini_m2
     max_build_duration: 60
-    inputs:
-      name:
-        description: Input description
-        default: Codemagic
     environment:
-      groups:
-        - group_name
-      vars:
-        PUBLIC_ENV_VAR: "value here"
-      flutter: stable
       xcode: latest
-    cache:
-      cache_paths:
-        - ~/.pub-cache
+      vars:
+        XCODE_WORKSPACE: "YourApp.xcodeproj"   # или YourApp.xcworkspace, если используешь CocoaPods
+        XCODE_SCHEME: "YourApp"
     triggering:
       events:
         - push
@@ -27,15 +17,22 @@ workflows:
         - pattern: '*'
           include: true
           source: true
-      cancel_previous_builds: false
     scripts:
-      - echo "Hello, ${{ inputs.name }}"
-      # Здесь замени ... на настоящие команды сборки
+      - name: Install dependencies (CocoaPods)
+        script: |
+          gem install cocoapods
+          pod install || true
+      - name: Build iOS app
+        script: |
+          xcodebuild clean build \
+          -project "$XCODE_WORKSPACE" \
+          -scheme "$XCODE_SCHEME" \
+          -destination 'generic/platform=iOS' \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
     artifacts:
-      - build/**/outputs/bundle/**/*.aab
+      - build/**/Build/Products/**/*.app
+      - build/**/Build/Products/**/*.ipa
     publishing:
       email:
         recipients:
-          - name@example.com
-      scripts:
-        - echo 'Post-publish script'
+          - your-email@example.com
