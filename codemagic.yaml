@@ -8,8 +8,8 @@ workflows:
     environment:
       xcode: latest
       vars:
-        XCODE_WORKSPACE: "YourApp.xcodeproj"   # или YourApp.xcworkspace, если используешь CocoaPods
-        XCODE_SCHEME: "YourApp"
+        XCODE_WORKSPACE: "xcworkspace"   # или YourApp.xcworkspace, если используешь CocoaPods
+        XCODE_SCHEME: "FinancialAdvisorApp"
     triggering:
       events:
         - push
