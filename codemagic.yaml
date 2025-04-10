@@ -4,7 +4,6 @@ workflows:
     labels:
       - ios
     instance_type: mac_mini_m2
-    remote_access: true
     max_build_duration: 60
     environment:
       xcode: latest
